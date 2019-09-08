@@ -127,13 +127,13 @@ const DetailPresenter = ({ result, loading, error }) =>
             <Divider>•</Divider>
             <Item>
               {result.imdb_id &&
-                  <a href={`https://imdb.com/title/${result.imdb_id}`} target="_blank" rel="noopener noreferrer"><img src="https://m.media-amazon.com/images/G/01/IMDb/BG_rectangle._CB1509060989_SY230_SX307_AL_.png" width="30" height="16"/></a>
+                  <a href={`https://imdb.com/title/${result.imdb_id}`} target="_blank" rel="noopener noreferrer"><img alt="IMDb icon" src="https://m.media-amazon.com/images/G/01/IMDb/BG_rectangle._CB1509060989_SY230_SX307_AL_.png" width="30" height="16"/></a>
                 }
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <ItemContainer>{result.videos.results.length > 0 && 
-          <iframe width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+          <iframe title={result.videos.results[0].key} width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
           }</ItemContainer>
         </Data>
       </Content>
