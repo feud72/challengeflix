@@ -12,7 +12,6 @@ const Container = styled.div`
   width: 100%;
   position: relative;
   padding: 50px;
-  
 `;
 
 const Backdrop = styled.div`
@@ -49,7 +48,7 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
-  width: 70%;
+  width: 90%;
   margin-left: 10px;
 `;
 
@@ -66,15 +65,13 @@ const Item = styled.span`
   vertical-align: middle;
 `;
 
-
-
 const Divider = styled.span`
   margin: 0 10px;
 `;
 
 const Overview = styled.p`
   font-size: 12px;
-  opacity: 0.7;
+  opacity: 0.8;
   line-height: 1.5;
   width: 50%;
 `;
