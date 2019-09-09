@@ -24,7 +24,7 @@ const Videos = ({videoList}) => {
           title={videoList[0].key}
           src={`https://www.youtube.com/embed/${videoList[0].key}`}
           width={`${width}`}
-          height="auto"
+          height={`${(width * 9) / 16}`}
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen></iframe>
