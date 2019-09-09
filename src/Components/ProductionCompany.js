@@ -49,7 +49,7 @@ const ProductionCompany = ({companies}) => (
         }
       />
     </ImageContainer>
-    <Title>{company.name}{company.origin_country? ` / ${company.origin_country}`:""}</Title>
+    <Title>{company.name}<br/>{company.origin_country?company.origin_country:""}</Title>
     </Container>
     </React.Fragment>
       ))}

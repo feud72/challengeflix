@@ -49,7 +49,8 @@ const Seasons = ({seasons}) => (
         }
       />
     </ImageContainer>
-    <Title>{season.name} / {season.episode_count} episodes </Title>
+    <Title>{season.name}<br/>
+    {season.episode_count} episodes</Title>
     </Container>
     </React.Fragment>
       ))}
