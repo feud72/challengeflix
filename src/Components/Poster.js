@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
   font-size: 12px;
@@ -47,7 +47,7 @@ const Year = styled.span`
   color: rgba(255, 255, 255, 0.5);
 `;
 
-const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
+const Poster = ({id, imageUrl, title, rating, year, isMovie = false}) => (
   <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
@@ -55,14 +55,14 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
           bgUrl={
             imageUrl
               ? `https://image.tmdb.org/t/p/w300${imageUrl}`
-              : require("../assets/noPosterSmall.png")
+              : require('../assets/noPosterSmall.png')
           }
         />
 
         <Rating>
           <span role="img" aria-label="rating">
             ⭐️
-          </span>{" "}
+          </span>{' '}
           {rating}/10
         </Rating>
       </ImageContainer>
@@ -80,7 +80,7 @@ Poster.propTypes = {
   title: PropTypes.string.isRequired,
   rating: PropTypes.number,
   year: PropTypes.string,
-  isMovie: PropTypes.bool
+  isMovie: PropTypes.bool,
 };
 
 export default Poster;

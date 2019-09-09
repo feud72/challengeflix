@@ -1,8 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Helmet from "react-helmet";
-import Loader from "Components/Loader";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Helmet from 'react-helmet';
+import Loader from 'Components/Loader';
+import Section from 'Components/Section';
+import ProductionCompany from 'Components/ProductionCompany';
+import Videos from 'Components/Videos';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -49,16 +52,19 @@ const Data = styled.div`
 
 const Title = styled.h3`
   font-size: 32px;
+  vertical-align: middle;
 `;
 
 const ItemContainer = styled.div`
   margin: 20px 0;
- 
 `;
 
 const Item = styled.span`
-vertical-align: middle;
+  vertical-align: middle;
+`;
 
+const H3 = styled.h3`
+  font-size: 18px;
 `;
 
 const Divider = styled.span`
@@ -72,7 +78,7 @@ const Overview = styled.p`
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
+const DetailPresenter = ({result, loading, error}) =>
   loading ? (
     <>
       <Helmet>
@@ -84,7 +90,7 @@ const DetailPresenter = ({ result, loading, error }) =>
     <Container>
       <Helmet>
         <title>
-          {result.original_title ? result.original_title : result.original_name}{" "}
+          {result.original_title ? result.original_title : result.original_name}{' '}
           | Nomflix
         </title>
       </Helmet>
@@ -96,14 +102,27 @@ const DetailPresenter = ({ result, loading, error }) =>
           bgImage={
             result.poster_path
               ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-              : require("../../assets/noPosterSmall.png")
+              : require('../../assets/noPosterSmall.png')
           }
         />
         <Data>
           <Title>
             {result.original_title
               ? result.original_title
-              : result.original_name}
+              : result.original_name}{' '}
+            {result.imdb_id && (
+              <a
+                href={`https://imdb.com/title/${result.imdb_id}`}
+                target="_blank"
+                rel="noopener noreferrer">
+                <img
+                  alt="IMDb icon"
+                  src="https://m.media-amazon.com/images/G/01/IMDb/BG_rectangle._CB1509060989_SY230_SX307_AL_.png"
+                  width="45"
+                  height="24"
+                />
+              </a>
+            )}
           </Title>
           <ItemContainer>
             <Item>
@@ -111,30 +130,52 @@ const DetailPresenter = ({ result, loading, error }) =>
                 ? result.release_date.substring(0, 4)
                 : result.first_air_date.substring(0, 4)}
             </Item>
-            <Divider>•</Divider>
+            <Divider>|</Divider>
             <Item>
-              {result.runtime ? result.runtime : result.episode_run_time[0]} min
+              {result.runtime || result.episode_run_time
+                ? `${result.runtime ? result.runtime : ''}${
+                    result.episode_run_time ? result.episode_run_time[0] : ''
+                  } min`
+                : '-'}
             </Item>
-            <Divider>•</Divider>
+            <Divider>|</Divider>
             <Item>
               {result.genres &&
                 result.genres.map((genre, index) =>
                   index === result.genres.length - 1
                     ? genre.name
-                    : `${genre.name} / `
+                    : `${genre.name} / `,
                 )}
             </Item>
-            <Divider>•</Divider>
+          </ItemContainer>
+          <ItemContainer>
             <Item>
-              {result.imdb_id &&
-                  <a href={`https://imdb.com/title/${result.imdb_id}`} target="_blank" rel="noopener noreferrer"><img alt="IMDb icon" src="https://m.media-amazon.com/images/G/01/IMDb/BG_rectangle._CB1509060989_SY230_SX307_AL_.png" width="30" height="16"/></a>
-                }
+              {result.production_countries &&
+                result.production_countries.map((country, index) =>
+                  index === result.production_countries.length - 1
+                    ? country.name
+                    : `${country.name} / `,
+                )}
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          <ItemContainer>{result.videos.results.length > 0 && 
-          <iframe title={result.videos.results[0].key} width="560" height="315" src={`https://www.youtube.com/embed/${result.videos.results[0].key}`} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-          }</ItemContainer>
+          <ItemContainer>
+            <Section title="Production Company">
+              {result.production_companies &&
+                result.production_companies.map((company, index) => (
+                  <ProductionCompany
+                    key={index}
+                    imageUrl={company.logo_path && company.logo_path}
+                    name={company.name}
+                    country={company.origin_country}
+                  />
+                ))}
+            </Section>
+          </ItemContainer>
+          <ItemContainer>
+            <H3>Videos</H3>
+            <Videos videoList={result.videos.results} />
+          </ItemContainer>
         </Data>
       </Content>
     </Container>
@@ -143,7 +184,7 @@ const DetailPresenter = ({ result, loading, error }) =>
 DetailPresenter.propTypes = {
   result: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 export default DetailPresenter;
