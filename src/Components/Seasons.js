@@ -34,34 +34,35 @@ const Title = styled.span`
   margin-bottom: 3px;
 `;
 
-const ProductionCompany = ({companies}) => (
-  <Section title="Production Company">
-  {companies &&
-    companies.map((company, index) => (
-      <React.Fragment key={company.id}>
+const Seasons = ({seasons}) => (
+  <Section title="Seasons">
+  {seasons &&
+    seasons.filter((season) => season.air_date != null).map((season, index) => (
+      <React.Fragment key={season.id}>
       <Container>
       <ImageContainer>
       <Image
         bgUrl={
-          company.logo_path
-            ? `https://image.tmdb.org/t/p/w300${company.logo_path}`
+          season.poster_path
+            ? `https://image.tmdb.org/t/p/w300${season.poster_path}`
             : require('../assets/noPosterSmall.png')
         }
       />
     </ImageContainer>
-    <Title>{company.name}{company.origin_country? ` / ${company.origin_country}`:""}</Title>
+    <Title>{season.name} / {season.episode_count} episodes </Title>
     </Container>
     </React.Fragment>
       ))}
 </Section> 
 );
 
-ProductionCompany.propTypes = {
-  companies: PropTypes.arrayOf(PropTypes.shape({
-  name: PropTypes.string,
-  id: PropTypes.number.isRequired,
-  logo_path: PropTypes.string,
-  origin_country: PropTypes.string.isRequired,}))
+Seasons.propTypes = {
+  seasons: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string,
+      name: PropTypes.string,
+      episode_count : PropTypes.number,
+  }))
 };
 
-export default ProductionCompany;
+export default Seasons;

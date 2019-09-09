@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import Loader from 'Components/Loader';
-import Section from 'Components/Section';
 import ProductionCompany from 'Components/ProductionCompany';
 import Videos from 'Components/Videos';
+import Seasons from 'Components/Seasons';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
   width: 100%;
   position: relative;
   padding: 50px;
+  
 `;
 
 const Backdrop = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-image: url(${props => props.bgImage});
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
   background-position: center center;
   background-size: cover;
   filter: blur(3px);
@@ -63,9 +66,7 @@ const Item = styled.span`
   vertical-align: middle;
 `;
 
-const H3 = styled.h3`
-  font-size: 18px;
-`;
+
 
 const Divider = styled.span`
   margin: 0 10px;
@@ -160,21 +161,9 @@ const DetailPresenter = ({result, loading, error}) =>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <ItemContainer>
-            <Section title="Production Company">
-              {result.production_companies &&
-                result.production_companies.map((company, index) => (
-                  <ProductionCompany
-                    key={index}
-                    imageUrl={company.logo_path && company.logo_path}
-                    name={company.name}
-                    country={company.origin_country}
-                  />
-                ))}
-            </Section>
-          </ItemContainer>
-          <ItemContainer>
-            <H3>Videos</H3>
-            <Videos videoList={result.videos.results} />
+            {result.production_companies && <ProductionCompany companies={result.production_companies} />}         
+            {result.seasons && <Seasons seasons={result.seasons} />}    
+            {result.videos.results.length > 0 && <Videos videoList={result.videos.results} />}
           </ItemContainer>
         </Data>
       </Content>
