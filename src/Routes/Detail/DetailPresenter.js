@@ -6,6 +6,7 @@ import Loader from 'Components/Loader';
 import ProductionCompany from 'Components/ProductionCompany';
 import Videos from 'Components/Videos';
 import Seasons from 'Components/Seasons';
+import DetailSubMenu from 'Components/DetailSubMenu';
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -22,7 +23,7 @@ const Backdrop = styled.div`
   height: 100%;
   background-image: url(${props => props.bgImage});
   background-repeat: no-repeat;
-  background-attachment: fixed;  
+  background-attachment: fixed;
   background-position: center center;
   background-size: cover;
   filter: blur(3px);
@@ -48,7 +49,7 @@ const Cover = styled.div`
 `;
 
 const Data = styled.div`
-  width: 90%;
+  width: 70%;
   margin-left: 10px;
 `;
 
@@ -73,7 +74,7 @@ const Overview = styled.p`
   font-size: 12px;
   opacity: 0.8;
   line-height: 1.5;
-  width: 50%;
+  width: 90%;
 `;
 
 const DetailPresenter = ({result, loading, error}) =>
@@ -158,9 +159,7 @@ const DetailPresenter = ({result, loading, error}) =>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
           <ItemContainer>
-            {result.production_companies && <ProductionCompany companies={result.production_companies} />}         
-            {result.seasons && <Seasons seasons={result.seasons} />}    
-            {result.videos.results.length > 0 && <Videos videoList={result.videos.results} />}
+            <DetailSubMenu result={result} />
           </ItemContainer>
         </Data>
       </Content>
