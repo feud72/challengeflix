@@ -8,7 +8,7 @@ const Container = styled.div``;
 const VideoList = styled.ul``;
 
 const VideoItem = styled.li`
-  line-height:200%;
+  line-height: 200%;
 `;
 
 const Title = styled.p`
@@ -31,8 +31,9 @@ const useWidth = () => {
 
 const useGetKey = initialValue => {
   const [key, setKey] = useState(initialValue);
-	useEffect(() =>{
-	return ;}, [key]);
+  useEffect(() => {
+    return;
+  }, [key]);
   return {key, setKey};
 };
 
@@ -42,26 +43,33 @@ const Videos = ({videoList}) => {
     videoList.length > 0 ? videoList[0].key : null,
   );
   return (
-		<>
-    <VideoContainer ref={ref}>
-      <Title>Videos</Title>
-      {videoList.length > 0 && (
-        <iframe
-          title={key}
-          src={`https://www.youtube.com/embed/${key}`}
-          width={`${width >= 480 ? 480 : width}`}
-          height={`${((width >= 480 ? 480 : width) * 9) / 16}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen></iframe>
-      )}
-    </VideoContainer>
-		<Container>
-		{videoList.length > 0 ?
-			videoList.map((video, index) =>(<VideoList><VideoItem onClick={() => setKey(video.key)}>{video.name}</VideoItem></VideoList>))
-			: ""}
-		</Container>
-	</>
+    <>
+      <VideoContainer ref={ref}>
+        <Title>Videos</Title>
+        {videoList.length > 0 && (
+          <iframe
+            title={key}
+            src={`https://www.youtube.com/embed/${key}`}
+            width={`${width >= 480 ? 480 : width}`}
+            height={`${((width >= 480 ? 480 : width) * 9) / 16}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen></iframe>
+        )}
+      </VideoContainer>
+      <Container>
+        {videoList.length > 0
+          ? videoList.map((video, index) => (
+              <VideoList>
+                <VideoItem
+                  onClick={() =>
+                    setKey(video.key)
+                  }>{`< ${video.name} >`}</VideoItem>
+              </VideoList>
+            ))
+          : ''}
+      </Container>
+    </>
   );
 };
 
