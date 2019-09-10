@@ -4,7 +4,7 @@ import ProductionCompany from 'Components/ProductionCompany';
 import Videos from 'Components/Videos';
 import Seasons from 'Components/Seasons';
 
-const Container = styled.div``;
+const ContentContainer = styled.div``;
 
 const TitleContainer = styled.div`
   margin-bottom: 20px;
@@ -55,9 +55,10 @@ const DetailSubMenu = ({result}) => {
         ) : (
           ''
         )}
+        <hr />
       </TitleContainer>
 
-      <Container>{content}</Container>
+      <ContentContainer>{content}</ContentContainer>
     </>
   );
 };
