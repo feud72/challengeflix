@@ -48,7 +48,7 @@ const Videos = ({videoList}) => {
     <>
       <VideoContainer ref={ref}>
         <Title>Videos</Title>
-        {videoList.length > 0 && (
+        {videoList.length > 0 ? (
           <iframe
             title={key}
             src={`https://www.youtube.com/embed/${key}`}
@@ -57,6 +57,8 @@ const Videos = ({videoList}) => {
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen></iframe>
+        ) : (
+          "Can't find Youtube video!"
         )}
       </VideoContainer>
       <Container>

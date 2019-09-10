@@ -27,11 +27,9 @@ const DetailSubMenu = ({result}) => {
   const [content, setContent] = useState('');
   useEffect(() => {
     setContent(
-      result.production_companies && menu === 'Companies' ? (
+      menu === 'Companies' ? (
         <ProductionCompany companies={result.production_companies} />
-      ) : result.videos &&
-        result.videos.results.length > 0 &&
-        menu === 'Videos' ? (
+      ) : menu === 'Videos' ? (
         <Videos videoList={result.videos.results} />
       ) : result.seasons && menu === 'Seasons' ? (
         <Seasons seasons={result.seasons} />
@@ -45,14 +43,8 @@ const DetailSubMenu = ({result}) => {
       <TitleContainer>
         {' '}
         <Title onClick={() => setMenu('Companies')}>Production Companies</Title>
-        {result.videos.results.length > 0 ? (
-          <>
-            <Divider>|</Divider>
-            <Title onClick={() => setMenu('Videos')}>Videos</Title>
-          </>
-        ) : (
-          ''
-        )}
+        <Divider>|</Divider>
+        <Title onClick={() => setMenu('Videos')}>Videos</Title>
         {result.seasons ? (
           <>
             <Divider>|</Divider>
