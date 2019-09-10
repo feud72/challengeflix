@@ -23,7 +23,7 @@ const Divider = styled.span`
 `;
 
 const DetailSubMenu = ({result}) => {
-  const [menu, setMenu] = useState('Companies');
+  const [menu, setMenu] = useState('Videos');
   const [content, setContent] = useState('');
   useEffect(() => {
     setContent(
@@ -45,8 +45,14 @@ const DetailSubMenu = ({result}) => {
       <TitleContainer>
         {' '}
         <Title onClick={() => setMenu('Companies')}>Production Companies</Title>
-        <Divider>|</Divider>
-        <Title onClick={() => setMenu('Videos')}>Videos</Title>
+        {result.videos.results.length > 0 ? (
+          <>
+            <Divider>|</Divider>
+            <Title onClick={() => setMenu('Videos')}>Videos</Title>
+          </>
+        ) : (
+          ''
+        )}
         {result.seasons ? (
           <>
             <Divider>|</Divider>

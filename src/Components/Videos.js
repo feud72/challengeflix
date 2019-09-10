@@ -1,7 +1,9 @@
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 
-const VideoContainer = styled.div``;
+const VideoContainer = styled.div`
+  margin-bottom: 15px;
+`;
 
 const Container = styled.div``;
 
