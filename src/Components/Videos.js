@@ -52,8 +52,8 @@ const Videos = ({videoList}) => {
           <iframe
             title={key}
             src={`https://www.youtube.com/embed/${key}`}
-            width={`${width >= 480 ? 480 : width}`}
-            height={`${((width >= 480 ? 480 : width) * 9) / 16}`}
+            width={`${width}`}
+            height={`${(width * 9) / 16}`}
             frameBorder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen></iframe>
