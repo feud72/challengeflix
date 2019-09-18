@@ -1,12 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Helmet from 'react-helmet';
-import Loader from 'Components/Loader';
-import ProductionCompany from 'Components/ProductionCompany';
-import Videos from 'Components/Videos';
-import Seasons from 'Components/Seasons';
-import DetailSubMenu from 'Components/DetailSubMenu';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Helmet from "react-helmet";
+import Loader from "Components/Loader";
+import DetailSubMenu from "Components/DetailSubMenu";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -77,7 +74,7 @@ const Overview = styled.p`
   width: 90%;
 `;
 
-const DetailPresenter = ({result, loading, error}) =>
+const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
     <>
       <Helmet>
@@ -89,7 +86,7 @@ const DetailPresenter = ({result, loading, error}) =>
     <Container>
       <Helmet>
         <title>
-          {result.original_title ? result.original_title : result.original_name}{' '}
+          {result.original_title ? result.original_title : result.original_name}{" "}
           | Challengeflix
         </title>
       </Helmet>
@@ -101,19 +98,20 @@ const DetailPresenter = ({result, loading, error}) =>
           bgImage={
             result.poster_path
               ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-              : require('../../assets/noPosterSmall.png')
+              : require("../../assets/noPosterSmall.png")
           }
         />
         <Data>
           <Title>
             {result.original_title
               ? result.original_title
-              : result.original_name}{' '}
+              : result.original_name}{" "}
             {result.imdb_id && (
               <a
                 href={`https://imdb.com/title/${result.imdb_id}`}
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+              >
                 <img
                   alt="IMDb icon"
                   src="https://m.media-amazon.com/images/G/01/IMDb/BG_rectangle._CB1509060989_SY230_SX307_AL_.png"
@@ -132,10 +130,10 @@ const DetailPresenter = ({result, loading, error}) =>
             <Divider>|</Divider>
             <Item>
               {result.runtime || result.episode_run_time
-                ? `${result.runtime ? result.runtime : ''}${
-                    result.episode_run_time ? result.episode_run_time[0] : ''
+                ? `${result.runtime ? result.runtime : ""}${
+                    result.episode_run_time ? result.episode_run_time[0] : ""
                   } min`
-                : '-'}
+                : "-"}
             </Item>
             <Divider>|</Divider>
             <Item>
@@ -143,7 +141,7 @@ const DetailPresenter = ({result, loading, error}) =>
                 result.genres.map((genre, index) =>
                   index === result.genres.length - 1
                     ? genre.name
-                    : `${genre.name} / `,
+                    : `${genre.name} / `
                 )}
             </Item>
           </ItemContainer>
@@ -153,7 +151,7 @@ const DetailPresenter = ({result, loading, error}) =>
                 result.production_countries.map((country, index) =>
                   index === result.production_countries.length - 1
                     ? country.name
-                    : `${country.name} / `,
+                    : `${country.name} / `
                 )}
             </Item>
           </ItemContainer>
@@ -169,7 +167,7 @@ const DetailPresenter = ({result, loading, error}) =>
 DetailPresenter.propTypes = {
   result: PropTypes.object,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+  error: PropTypes.string
 };
 
 export default DetailPresenter;
